@@ -1,5 +1,6 @@
 #!/bin/bash
 
+ROOT_DIR=$(git rev-parse --show-toplevel)
 HDL_TESTS=$(git diff --name-only --staged | grep .hdl | sed s/.hdl/.tst/g)
 NUM_HDL_TESTS=$(echo $HDL_TESTS | wc -w)
 
