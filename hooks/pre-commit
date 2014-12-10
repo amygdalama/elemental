@@ -1,0 +1,20 @@
+#!/bin/bash
+
+HDL_TESTS=$(git diff --name-only --staged | grep .hdl | sed s/.hdl/.tst/g)
+NUM_HDL_TESTS=$(echo $HDL_TESTS | wc -w)
+
+i=0
+for f in $HDL_TESTS
+do
+    ((i++))
+    echo "Running test" $f "[1m[33m($i/$NUM_HDL_TESTS)[0m"
+    $ROOT_DIR/tools/HardwareSimulator.sh $ROOT_DIR/$f
+    if [ $? = 0 ]
+    then
+        echo -e "[1m[32mOK[0m"
+    else
+        echo -e "[1m[31mFAIL[0m"
+    fi
+done
+exit
+
