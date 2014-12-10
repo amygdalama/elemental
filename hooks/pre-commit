@@ -3,6 +3,7 @@
 ROOT_DIR=$(git rev-parse --show-toplevel)
 HDL_TESTS=$(git diff --name-only --staged | grep .hdl | sed s/.hdl/.tst/g)
 NUM_HDL_TESTS=$(echo $HDL_TESTS | wc -w)
+FAILURES=0
 
 i=0
 for f in $HDL_TESTS
@@ -14,8 +15,19 @@ do
     then
         echo -e "[1m[32mOK[0m"
     else
+        ((FAILURES++))
         echo -e "[1m[31mFAIL[0m"
     fi
 done
+
+echo "[1m-------- RESULTS --------[0m"
+echo "Ran $NUM_HDL_TESTS tests"
+
+if [ $FAILURES = 0 ]
+then
+    echo -e "[1m[32mOK[0m"
+else
+    echo -e "[1m[31m$FAILURES failure(s)[0m"
+fi
 exit
 
