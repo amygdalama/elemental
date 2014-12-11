@@ -26,8 +26,9 @@ echo "Ran $NUM_HDL_TESTS tests"
 if [ $FAILURES = 0 ]
 then
     echo -e "[1m[32mOK[0m"
+    exit 0
 else
     echo -e "[1m[31m$FAILURES failure(s)[0m"
+    exit 1
 fi
-exit
 
