@@ -9,7 +9,7 @@ then
                           sed s/.hdl/.tst/g)
                         <(find $ROOT_DIR -name "*.tst"))
 else
-    HDL_TESTS=$(find projects/01/ -name "*.tst")
+    HDL_TESTS=$(find $ROOT_DIR/projects/01 $ROOT_DIR/projects/02 -name "*.tst")
 fi
 
 NUM_HDL_TESTS=$(echo $HDL_TESTS | wc -w)
