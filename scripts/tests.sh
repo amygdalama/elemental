@@ -4,7 +4,7 @@ ROOT_DIR=$(git rev-parse --show-toplevel)
 
 if [ $MODIFIED_ONLY ]
 then
-    HDL_TESTS=$(git diff --name-only --staged | grep .hdl | sed s/.hdl/.tst/g)
+    HDL_TESTS=$(grep -f <(git diff --name-only --staged | grep .hdl | sed s/.hdl/.tst/g) <(find $ROOT_DIR -name "*.tst"))
 else
     HDL_TESTS=$(find projects/01/ -name "*.tst")
 fi
@@ -17,7 +17,7 @@ for f in $HDL_TESTS
 do
     ((i++))
     echo "Running test" $f "[1m[33m($i/$NUM_HDL_TESTS)[0m"
-    $ROOT_DIR/tools/HardwareSimulator.sh $ROOT_DIR/$f
+    $ROOT_DIR/tools/HardwareSimulator.sh $f
     if [ $? = 0 ]
     then
         echo -e "[1m[32mOK[0m"
