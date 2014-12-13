@@ -1,0 +1,12 @@
+CHIP IsNeg {
+    IN  
+        in[16]; // 16-bit inputs        
+
+    OUT 
+        out; // 1 if (in < 0), 0 otherwise 
+
+    PARTS:
+    
+    Mux(a=false, b=true, sel=in[15], out=out);
+}
+
