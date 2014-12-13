@@ -12,10 +12,7 @@ ROOT_DIR=$(git rev-parse --show-toplevel)
 
 if [ $MODIFIED_ONLY ]
 then
-    HDL_TESTS=$(grep -f <(git diff --name-only --staged |
-                          grep .hdl |
-                          sed s/.hdl/.tst/g)
-                        <(find $ROOT_DIR -name "*.tst"))
+    HDL_TESTS=$(grep -f <(git diff --name-only --staged | grep .hdl | sed s/.hdl/.tst/g) <(find $ROOT_DIR -name "*.tst"))
 else
     HDL_TESTS=$(find $ROOT_DIR/projects/$1 -name "*.tst")
 fi
