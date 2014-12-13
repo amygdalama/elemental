@@ -1,5 +1,13 @@
 #!/bin/bash
 
+# Usage:
+
+# $ ./tests.sh 01
+# runs all .tst scripts in the directory for chapter 1
+
+# $ MODIFIED_ONLY=true ./tests.sh
+# runs .tst scripts for all modified .hdl files
+
 ROOT_DIR=$(git rev-parse --show-toplevel)
 
 if [ $MODIFIED_ONLY ]
@@ -9,7 +17,7 @@ then
                           sed s/.hdl/.tst/g)
                         <(find $ROOT_DIR -name "*.tst"))
 else
-    HDL_TESTS=$(find $ROOT_DIR/projects/01 $ROOT_DIR/projects/02 -name "*.tst")
+    HDL_TESTS=$(find $ROOT_DIR/projects/$1 -name "*.tst")
 fi
 
 NUM_HDL_TESTS=$(echo $HDL_TESTS | wc -w)
