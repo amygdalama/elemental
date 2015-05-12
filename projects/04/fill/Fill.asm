@@ -9,3 +9,39 @@
 // program clears the screen, i.e. writes "white" in every pixel.
 
 // Put your code here.
+
+(LOOP)
+    @i
+    M=0
+    @KBD
+    D=M
+    @BLACK
+    D;JGT   // goto BLACK always; change after test
+(WHITE)
+    @i
+    D=M
+    @SCREEN
+    A=A+D
+    M=0    // turn word white
+    @i
+    MD=M+1
+    @8192
+    D=A-D
+    @WHITE
+    D;JGT   // if we have more screen to fill
+    @LOOP
+    0;JMP
+(BLACK)
+    @i
+    D=M
+    @SCREEN
+    A=A+D
+    M=-1    // turn word black
+    @i
+    MD=M+1
+    @8192
+    D=A-D
+    @BLACK
+    D;JGT   // if we have more screen to fill
+    @LOOP
+    0;JMP
