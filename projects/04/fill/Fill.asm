@@ -16,7 +16,7 @@
     @KBD
     D=M
     @BLACK
-    D;JGT   // goto BLACK always; change after test
+    D;JGT   // jump to black if a key is pressed
 (WHITE)
     @i
     D=M
